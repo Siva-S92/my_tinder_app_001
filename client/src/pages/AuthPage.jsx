@@ -15,6 +15,15 @@ function AuthPage() {
                 {
                     isLogin ? <LoginForm /> : <SignUpForm />
                 }
+                <div className='mt-8 text-center'>
+                    <p className='text-sm text-gray-600'>
+                        {isLogin ? "New to Swipe" : "All ready have an account?"}
+                    </p>
+                    <button className='text-red-600 hover:text-red-800 transition-colors duration-300' onClick={() => setIsLogin((previsLogin) => !previsLogin)}>
+                        {isLogin ? "create a new account" : "Sign in to your account"}
+                    </button>
+
+                </div>
             </div>
         </div>
     </div>
