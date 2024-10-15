@@ -3,46 +3,58 @@ import React, { useState } from "react";
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const loading = false;
+
+  const login = () => {};
   return (
-    <form className="space-y-6">
+    <form
+      className="space-y-6"
+      onSubmit={(e) => {
+        e.preventDefault();
+        login({ email, password });
+      }}
+    >
+      {/* email */}
       <div>
         <label
-          className="block text-sm font-medium text-gray-700"
           htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
         >
           Email address
         </label>
-        <div>
+        <div className="mt-1">
           <input
             id="email"
             name="email"
             type="email"
             autoComplete="email"
             required
-            defaultValue={email}
-            onChange={(e) => e.target.value}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
           />
         </div>
       </div>
 
+      {/* password */}
+
       <div>
         <label
+          htmlFor="password"
           className="block text-sm font-medium text-gray-700"
-          htmlFor="email"
         >
           Password
         </label>
-        <div>
+        <div className="mt-1">
           <input
             id="password"
             name="password"
             type="password"
             autoComplete="current-password"
             required
-            defaultValue={password}
-            onChange={(e) => e.target.value}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
           />
         </div>
