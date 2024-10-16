@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import ChatPage from './pages/ChatPage'
+import { useAuthStore } from './store/useAuthStore.js'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  },[checkAuth])
+
+
+
   return (
     <div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]'>
       <Routes>
@@ -14,6 +24,8 @@ function App() {
         <Route path='/profile' element={ <ProfilePage /> }/>
         <Route path='/chat/:id' element={ <ChatPage /> }/>
       </Routes>
+
+      <Toaster />
     </div>
   )
 }

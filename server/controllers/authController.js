@@ -8,58 +8,54 @@ const signToken = (id) => {
 
 export const signup = async (req, res) => {
   const { name, email, password, age, gender, genderPreference } = req.body;
-  try {
-    if (!name || !email || !password || !age || !gender || !genderPreference) {
-      return res.status(400).json({
-        sucess: false,
-        message: "All fields are required",
-      });
-    }
-    if (age < 18) {
-      return res.status(400).json({
-        sucess: false,
-        message: "You must at least 18 years of old",
-      });
-    }
-    if (password.lenth < 6) {
-      return res.status(400).json({
-        sucess: false,
-        message: "Password must be at least 6 characters",
-      });
-    }
+	try {
+		if (!name || !email || !password || !age || !gender || !genderPreference) {
+			return res.status(400).json({
+				success: false,
+				message: "All fields are required",
+			});
+		}
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+		if (age < 18) {
+			return res.status(400).json({
+				success: false,
+				message: "You must at lest 18 years old",
+			});
+		}
 
-    const newUser = await User.create({
-      name,
-      email,
-      hashedPassword,
-      age,
-      gender,
-      genderPreference,
-    });
+		if (password.length < 6) {
+			return res.status(400).json({
+				success: false,
+				message: "Password must be at least 6 characters",
+			});
+		}
 
-    const token = signToken(newUser._id);
-    res.cookie("jwt-token", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-      httpOnly: true, // prevent XSS attacks
-      sameSite: "strict", //prevents CSRF attacks
-      secure: process.env.NODE_ENV === "production",
-    });
-    return res.status(201).json({
-      sucess: true,
-      message: "The user registered successfully",
-      token,
-      user: newUser,
-    });
-  } catch (error) {
-    console.log("Error Occured with", error);
-    return res.status(500).json({
-      sucess: false,
-      message: "Server Error",
-    });
-  }
+		const newUser = await User.create({
+			name,
+			email,
+			password,
+			age,
+			gender,
+			genderPreference,
+		});
+
+		const token = signToken(newUser._id);
+
+		res.cookie("jwt", token, {
+			maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+			httpOnly: true, // prevents XSS attacks
+			sameSite: "strict", // prevents CSRF attacks
+			secure: process.env.NODE_ENV === "production",
+		});
+
+		res.status(201).json({
+			success: true,
+			user: newUser,
+		});
+	} catch (error) {
+		console.log("Error in signup controller:", error);
+		res.status(500).json({ success: false, message: "Server error" });
+	}
 };
 
 
@@ -89,7 +85,7 @@ export const login = async (req, res) => {
       });
     }
     const token = signToken(user._id);
-    res.cookie("jwt-token", token, {
+    res.cookie("jwt_token", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
       httpOnly: true, // prevent XSS attacks
       sameSite: "strict", //prevents CSRF attacks

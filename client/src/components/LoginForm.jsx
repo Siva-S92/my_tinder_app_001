@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const loading = false;
 
-  const login = () => {};
+  
+
+  const { login, loading } = useAuthStore();
+
   return (
     <form
       className="space-y-6"

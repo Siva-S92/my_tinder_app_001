@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
+import jwt  from 'jsonwebtoken';
 import User from '../../models/User.js';
 
 export const protectRoute = async(req, res, next) => {
     try {
-        const token = req.cookies.jwt-token
+        const token = req.cookies.jwt_token
         if(!token){
             return res.status(401).json({
                 success: false,
@@ -22,7 +22,7 @@ export const protectRoute = async(req, res, next) => {
         next();
     } catch (error) {
         console.log(`Error in auth middleware ${error}`)
-        if(error instanceof JsonWebTokenError){
+        if(error instanceof jwt.JsonWebTokenError){
             return res.status(401).json({
                 success: false,
                 message: "Not Authorized"
