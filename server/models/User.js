@@ -24,13 +24,13 @@ const userSchema = new Schema({
     trim: true,
   },
   gender: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
     enum: ["male", "female"],
   },
   genderPreference: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
     enum: ["male", "female", "both"],
