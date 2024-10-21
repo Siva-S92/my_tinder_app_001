@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { clientURL } from '../../constant';
+import { clientURL } from '../constant';
+
 
 
 export const axiosInstance = axios.create({
