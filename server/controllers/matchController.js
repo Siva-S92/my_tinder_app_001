@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { getConnectedUsers, getIo } from "../socket/socket.server.js";
+import { getConnectedUsers, getIO } from "../socket/socket.server.js";
 
 export const swipeRight = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ export const swipeRight = async (req, res) => {
       });
     }
     if (!currentUser.likes.includes(likedUserId)) {
-      currentUser.likes(likedUserId);
+      currentUser.likes.push(likedUserId);
       await currentUser.save();
       // if other user already liked us, then it is a match, so let's update both the users
       if (likedUser.likes.includes(currentUser.id)) {
@@ -26,7 +26,7 @@ export const swipeRight = async (req, res) => {
         // TO SEND  NOTIFICATIONS IN REALTIME USING SOCKET.IO
 
         const connectedUsers = getConnectedUsers();
-        const io = getIo()
+        const io = getIO()
         const likedUserSocketId = connectedUsers.get(likedUserId)
         if(likedUserSocketId){
           io.to(likedUserSocketId).emit("newMatch", {
@@ -67,7 +67,7 @@ export const swipeLeft = async (req, res) => {
     const { dislikedUserId } = req.params;
     const currentUser = await User.findById(req.user.id);
     if (!currentUser.dislikes.includes(dislikedUserId)) {
-      currentUser.dislikes(dislikedUserId);
+      currentUser.dislikes.push(dislikedUserId);
       await currentUser.save();
     }
 
