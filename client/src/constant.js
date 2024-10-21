@@ -1,1 +1,1 @@
-export const clientURL = "http://localhost:5000";
+export const clientURL = "https://my-tinder-app-001-frontend.vercel.app";
