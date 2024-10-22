@@ -46,7 +46,7 @@ ConnectDB();
 
 
 // routes
-app.get("/", async (req, res) => res.send("testing with vercel deployment"))
+
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/matches", matchRoutes)
