@@ -1,10 +1,10 @@
 import io from "socket.io-client";
+import { serverURL } from "../constant";
 
 
 
 
-// const SOCKET_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "/";
-const SOCKET_URL = "/";
+const SOCKET_URL = import.meta.env.MODE === "development" ? serverURL : "/";
 
 let socket = null;
 

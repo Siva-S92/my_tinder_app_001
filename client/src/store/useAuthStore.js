@@ -15,8 +15,8 @@ export const useAuthStore = create((set) => ({
       const res = await axiosInstance.post("/auth/signup", signupData);
       console.log(res.data);
 
-      set({ authUser: res?.data?.user });
-      initializeSocket(res?.data?.user._id)
+      set({ authUser: res.data.user });
+      initializeSocket(res.data.user._id)
       toast.success("Account Created Successfully");
     } catch (error) {
       console.log(error);
@@ -32,8 +32,8 @@ export const useAuthStore = create((set) => ({
       const res = await axiosInstance.post("/auth/login", loginData);
       console.log(res.data);
 
-      set({ authUser: res?.data?.user });
-      initializeSocket(res?.data?.user._id)
+      set({ authUser: res.data.user });
+      initializeSocket(res.data.user._id)
       toast.success(`${res.data.user.name} logged in successfully`);
     } catch (error) {
       console.log(error);

@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config({path: "../.env"});
 
-const maleNames = ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas"];
+const maleNames = ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Siva"];
 
 const femaleNames = [
 	"Mary",
@@ -21,6 +21,7 @@ const femaleNames = [
 	"Karen",
 	"Nancy",
 	"Lisa",
+	"Dayana"
 ];
 
 const genderPreferences = ["male", "female", "both"];
@@ -46,6 +47,9 @@ const bioDescriptors = [
 	"Night owl",
 	"Early bird",
 	"Aspiring chef",
+	"Content creator",
+	"Solo traveler",
+	"Script writer"
 ];
 
 const generateBio = () => {
@@ -59,7 +63,7 @@ const generateRandomUser = (gender, index) => {
 	const age = Math.floor(Math.random() * (45 - 21 + 1) + 21);
 	return {
 		name,
-		email: `${name.toLowerCase()}${age}@example.com`,
+		email: `${name.toLowerCase()}@gmail.com`,
 		password: bcrypt.hashSync("password123", 10),
 		age,
 		gender,
