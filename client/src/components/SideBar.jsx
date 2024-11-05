@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Loader, MessageCircle, X } from "lucide-react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useMatchStore } from "../store/useMatchStore";
 
-function SideBar() {
+const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -17,9 +17,12 @@ function SideBar() {
   return (
     <>
       <div
-        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-md overflow-hidden transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:static lg:w-1/4`}
+        className={`
+		fixed inset-y-0 left-0 z-10 w-64 bg-white shadow-md overflow-hidden transition-transform duration-300
+		 ease-in-out
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          lg:translate-x-0 lg:static lg:w-1/4
+		`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -67,9 +70,8 @@ function SideBar() {
       </button>
     </>
   );
-}
-
-export default SideBar;
+};
+export default Sidebar;
 
 const NoMatchesFound = () => (
   <div className="flex flex-col items-center justify-center h-full text-center">

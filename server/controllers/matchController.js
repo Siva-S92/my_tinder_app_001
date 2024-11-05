@@ -118,7 +118,7 @@ export const getUserProfiles = async (req, res) => {
               ? { $in: ["male", "female"] }
               : currentUser.genderPreference,
         },
-        { genderPreference: { $in: [currentUser.genderPreference, "both"] } },
+        { genderPreference: { $in: [currentUser.gender, "both"] } },
       ],
     });
     res.status(200).json({

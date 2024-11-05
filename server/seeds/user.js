@@ -61,13 +61,14 @@ const generateRandomUser = (gender, index) => {
 	const names = gender === "male" ? maleNames : femaleNames;
 	const name = names[index];
 	const age = Math.floor(Math.random() * (45 - 21 + 1) + 21);
+	let genderPreference = gender === "male" ? "female" : "male"
 	return {
 		name,
 		email: `${name.toLowerCase()}@gmail.com`,
 		password: bcrypt.hashSync("password123", 10),
 		age,
 		gender,
-		genderPreference: genderPreferences[Math.floor(Math.random() * genderPreferences.length)],
+		genderPreference,
 		bio: generateBio(),
 		image: `/${gender}/${index + 1}.jpg`,
 	};
