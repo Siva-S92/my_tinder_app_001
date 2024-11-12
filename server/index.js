@@ -1,4 +1,5 @@
 import express from "express";
+import helmet from 'helmet'
 import dotenv, { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -30,6 +31,7 @@ initializeSocket(httpServer)
 
 
 //middlewares
+app.use(helmet())
 app.use(express.json({limit: '60mb'}));
 app.use(express.urlencoded({extended: true, limit: '60mb'}))
 app.use(cors({
